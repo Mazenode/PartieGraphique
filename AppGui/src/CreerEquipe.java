@@ -9,9 +9,11 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
 
 public class CreerEquipe extends JFrame {
 
@@ -20,9 +22,10 @@ public class CreerEquipe extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField EntreeNomCompet;
-	private JTextField EntreeNbEquipes;
-	private JTextField EntreeLieuCompet;
+	private JTextField EntreeNomEquipe;
+	private JTextField EntreeNbJoueur;
+	private JTextField EntreeVille;
+	private JTextField EntreePays;
 
 	/**
 	 * Launch the application.
@@ -31,8 +34,7 @@ public class CreerEquipe extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreerEquipe creerCompet = new CreerEquipe();
-					creerCompet.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,7 +45,7 @@ public class CreerEquipe extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreerEquipe() {
+	public CreerEquipe(ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
 		setResizable(false);
@@ -52,6 +54,9 @@ public class CreerEquipe extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		ArrayList<String> listeTemp = new ArrayList();
+		String [] tactique = {"4-4-2 à plat", "4-4-2 en losange", "4-2-3-1", "4-3-3", "3-5-2", "3-4-3"};
 		
 		JPanel Parent = new JPanel();
 		Parent.setBounds(0, 0, 468, 411);
@@ -75,59 +80,44 @@ public class CreerEquipe extends JFrame {
 		lblNomDeLa.setBounds(48, 136, 174, 47);
 		CreerEquipe1.add(lblNomDeLa);
 		
-		EntreeNomCompet = new JTextField();
-		EntreeNomCompet.setBounds(190, 152, 187, 20);
-		CreerEquipe1.add(EntreeNomCompet);
-		EntreeNomCompet.setColumns(10);
+		EntreeNomEquipe = new JTextField();
+		EntreeNomEquipe.setBounds(190, 152, 187, 20);
+		CreerEquipe1.add(EntreeNomEquipe);
+		EntreeNomEquipe.setColumns(10);
 		
-		JLabel lblNombreDquipesParticipantes = new JLabel("Nom de la ville :");
+		JLabel lblNombreDquipesParticipantes = new JLabel("Nombre de joueurs :");
 		lblNombreDquipesParticipantes.setForeground(Color.WHITE);
 		lblNombreDquipesParticipantes.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		lblNombreDquipesParticipantes.setBounds(48, 171, 243, 47);
+		lblNombreDquipesParticipantes.setBounds(48, 171, 142, 47);
 		CreerEquipe1.add(lblNombreDquipesParticipantes);
 		
-		EntreeNbEquipes = new JTextField();
-		EntreeNbEquipes.setBounds(190, 187, 187, 20);
-		CreerEquipe1.add(EntreeNbEquipes);
-		EntreeNbEquipes.setColumns(10);
+		EntreeNbJoueur = new JTextField();
+		EntreeNbJoueur.setBounds(211, 187, 48, 20);
+		CreerEquipe1.add(EntreeNbJoueur);
+		EntreeNbJoueur.setColumns(10);
 		
-		JLabel lblLieuDeDroulement = new JLabel("Nom du pays :");
+		JLabel lblLieuDeDroulement = new JLabel("Ville :");
 		lblLieuDeDroulement.setForeground(Color.WHITE);
 		lblLieuDeDroulement.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		lblLieuDeDroulement.setBounds(48, 205, 167, 47);
+		lblLieuDeDroulement.setBounds(48, 205, 59, 47);
 		CreerEquipe1.add(lblLieuDeDroulement);
 		
-		EntreeLieuCompet = new JTextField();
-		EntreeLieuCompet.setBounds(169, 221, 158, 20);
-		CreerEquipe1.add(EntreeLieuCompet);
-		EntreeLieuCompet.setColumns(10);
+		EntreeVille = new JTextField();
+		EntreeVille.setBounds(96, 218, 158, 20);
+		CreerEquipe1.add(EntreeVille);
+		EntreeVille.setColumns(10);
 		
 		JPanel CreerEquipe2 = new JPanel();
-		
-		JButton btnContinuer = new JButton("Continuer");
-		btnContinuer.setForeground(new Color(91,64,153) );
-		btnContinuer.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-		btnContinuer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Parent.removeAll();
-				Parent.add(CreerEquipe2);
-				Parent.repaint();
-				Parent.revalidate();
-			}
-		});
-		btnContinuer.setBackground(Color.WHITE);
-		btnContinuer.setBounds(140, 344, 186, 23);
-		CreerEquipe1.add(btnContinuer);
-		
+			
 		JLabel lblTactiqueParDfaut = new JLabel("Tactique par d\u00E9faut :");
 		lblTactiqueParDfaut.setForeground(Color.WHITE);
 		lblTactiqueParDfaut.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		lblTactiqueParDfaut.setBounds(48, 242, 167, 34);
+		lblTactiqueParDfaut.setBounds(48, 279, 167, 34);
 		CreerEquipe1.add(lblTactiqueParDfaut);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setBounds(203, 252, 124, 22);
-		CreerEquipe1.add(comboBox);
+		/*JComboBox<String> choixTactique = new JComboBox<String>(tactique);
+		choixTactique.setBounds(202, 288, 124, 22);
+		CreerEquipe1.add(choixTactique);*/
 		
 		
 		CreerEquipe2.setLayout(null);
@@ -135,9 +125,10 @@ public class CreerEquipe extends JFrame {
 		Parent.add(CreerEquipe2, "name_149922086670100");
 		
 		JLabel lblCrerUnequipe = new JLabel("Cr\u00E9er une \u00E9quipe :");
+		lblCrerUnequipe.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCrerUnequipe.setForeground(Color.WHITE);
 		lblCrerUnequipe.setFont(new Font("Segoe UI", Font.PLAIN, 23));
-		lblCrerUnequipe.setBounds(137, 62, 207, 47);
+		lblCrerUnequipe.setBounds(10, 62, 448, 47);
 		CreerEquipe2.add(lblCrerUnequipe);
 		
 		JButton btnAjouterUnequipe = new JButton("Ajouter un joueur d\u00E9j\u00E0 \u00E9xistant");
@@ -159,5 +150,35 @@ public class CreerEquipe extends JFrame {
 		btnCrerUnequipe.setBackground(Color.WHITE);
 		btnCrerUnequipe.setBounds(112, 253, 249, 23);
 		CreerEquipe2.add(btnCrerUnequipe);
+	
+		JLabel lblPays = new JLabel("Pays :");
+		lblPays.setForeground(Color.WHITE);
+		lblPays.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		lblPays.setBounds(48, 241, 59, 47);
+		CreerEquipe1.add(lblPays);
+		
+		EntreePays = new JTextField();
+		EntreePays.setColumns(10);
+		EntreePays.setBounds(96, 254, 158, 20);
+		CreerEquipe1.add(EntreePays);
+		
+		JButton btnContinuer = new JButton("Continuer");
+		btnContinuer.setForeground(new Color(91,64,153) );
+		btnContinuer.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		btnContinuer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nomEquipe = EntreeNomEquipe.getText();
+				String nbJoueurs = EntreeNbJoueur.getText();
+				String ville = EntreeVille.getText();
+				String pays = EntreePays.getText();
+				//String poste = choixTactique.getSelectedItem().toString();			
+				dispose();
+				AjouterJoueur fenetreAj = new AjouterJoueur(listeEquipe);
+				fenetreAj.setVisible(true);
+			}
+		});
+		btnContinuer.setBackground(Color.WHITE);
+		btnContinuer.setBounds(140, 344, 186, 23);
+		CreerEquipe1.add(btnContinuer);
 	}
 }

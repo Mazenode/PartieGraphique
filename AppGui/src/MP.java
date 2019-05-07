@@ -4,6 +4,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -53,6 +54,12 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		 ArrayList<Joueur> listeJoueur = new ArrayList();
+	     ArrayList<Arbitre> listeArbitre = new ArrayList();
+	     ArrayList<Entrainneur> listeEntrainneur = new ArrayList();
+	     ArrayList<Competition> listeCompet = new ArrayList();
+	     ArrayList<Match> listeMatch = new ArrayList();
+	     ArrayList<Equipe> listeEquipe = new ArrayList();
 		
 		Menu = new JFrame();
 		Menu.getContentPane().setLayout(null);
@@ -273,8 +280,8 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 				BoutonCreerMatch.setBackground(new Color(91, 64, 153));
 			}
 			@Override
-			public void mousePressed(MouseEvent e) {
-				CreerParticipant creerParticipant = new CreerParticipant();
+			public void mousePressed(MouseEvent e) {				
+				CreerParticipant creerParticipant = new CreerParticipant(/*listeJoueur, listeArbitre, listeEntrainneur*/);
 				cache.setVisible(true);
 				creerParticipant.setVisible(true);
 				creerParticipant.addWindowListener(new WindowAdapter() {
@@ -294,7 +301,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				CreerEquipe creerEquipe = new CreerEquipe();
+				CreerEquipe creerEquipe = new CreerEquipe(listeJoueur, listeEquipe);
 				cache.setVisible(true);
 				creerEquipe.setVisible(true);
 				creerEquipe.addWindowListener(new WindowAdapter() {
@@ -314,6 +321,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			
 			}
 		});
+		
 		
 		JPanel fond = new JPanel();
 		fond.setBounds(10, 11, 848, 580);

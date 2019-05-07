@@ -41,8 +41,7 @@ public class Afficher extends JDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreerEquipe creerCompet = new CreerEquipe();
-					creerCompet.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,6 +53,10 @@ public class Afficher extends JDialog {
 	 * Create the frame.
 	 */
 	public Afficher(int choix/*, ArrayList listeNonSelec, ArrayList listeSelec*/) {
+		ArrayList<Joueur> listeJoueur = new ArrayList<Joueur>();
+		listeJoueur.add(new Joueur("Aubry","Mathieu",19,"France","Attaquant", "aucune"));
+		listeJoueur.add(new Joueur("Chaignaud","Quentin",20,"France","Attaquant","aucune"));
+		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
 		setResizable(false);
@@ -66,6 +69,10 @@ public class Afficher extends JDialog {
 		String titre = "";
 		String contenu = "";
 		Image imageQuitter = new ImageIcon(this.getClass().getResource("Quitter.png")).getImage();
+				
+		String nomColonnes[] = {"Nom","Prénom","Âge", "Nationnalité","Poste"};
+		Object[][] donne = new Object[listeJoueur.size()] [5];
+		JTable table = new JTable(donne,nomColonnes);
 		
 		switch (choix) {
 			case 1:
@@ -121,11 +128,23 @@ public class Afficher extends JDialog {
 		quitter1.setBounds(418, 11, 40, 36);
 		Menu1.add(quitter1);
 		
-		String[] nomColonnes = {"Nom","Prénom","Âge", "Nationnalité","Poste"};
-		String [][] data = {{"Chaignaud", "Quentin", "19", "Francaise", "Attaquant"}};
 		
-		table = new JTable(data,nomColonnes);
-		table.setBounds(64, 128, 361, 174);
+				
+		
+		
+		table.setBounds(64, 128, 361, 174);		
+		for(int i = 0;i <listeJoueur.size();i++) {
+			donne[i][0] = listeJoueur.get(i).getnom();
+			
+			donne[i][1] = listeJoueur.get(i).getprenom();
+			
+			donne[i][2] = listeJoueur.get(i).getage();
+			
+			donne[i][3] = listeJoueur.get(i).getnationnalite();
+			
+			donne[i][4] = listeJoueur.get(i).getposte();
+			
+		}
 		Menu1.add(table);
 		
 		

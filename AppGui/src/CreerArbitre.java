@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class CreerJoueur extends JDialog {
+public class CreerArbitre extends JDialog {
 
 	/**
 	 * 
@@ -47,7 +47,7 @@ public class CreerJoueur extends JDialog {
 	 * Create the frame.
 	 */
 	
-	public CreerJoueur(ArrayList<Joueur> listeJ) {
+	public CreerArbitre(ArrayList<Arbitre> listeA) {
 		setBounds(470, 250, 448, 378);
 		setResizable(false);
 		setUndecorated(true);
@@ -58,7 +58,7 @@ public class CreerJoueur extends JDialog {
 		contentPane.setLayout(null);
 		
 		String[] nationnalites = { "Allemand", "Argentin", "Belge", "Bresilien", "Sud Coréen", "Espagnol", "Français","Islandais", "Italien", "Portugais","Russe" };
-		String[] posteJoueur = { "Attaquant", "Défenseur", "Gardien"};
+		String[] posteArbitre = { "Arbitre central", "Arbitre de touche", "Arbitre assistant"};
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 428, 356);
@@ -66,7 +66,7 @@ public class CreerJoueur extends JDialog {
 		panel.setBackground(new Color(91, 64, 153));
 		contentPane.add(panel);
 		
-		JLabel lblCrerUnJoueur = new JLabel("Cr\u00E9er un joueur :");
+		JLabel lblCrerUnJoueur = new JLabel("Cr\u00E9er un arbitre :");
 		lblCrerUnJoueur.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCrerUnJoueur.setForeground(Color.WHITE);
 		lblCrerUnJoueur.setFont(new Font("Segoe UI", Font.PLAIN, 23));
@@ -122,7 +122,7 @@ public class CreerJoueur extends JDialog {
 		lblPoste.setBounds(91, 238, 107, 36);
 		panel.add(lblPoste);
 		
-		JComboBox<String> choixPoste = new JComboBox<String>(posteJoueur);
+		JComboBox<String> choixPoste = new JComboBox<String>(posteArbitre);
 		choixPoste.setBounds(149, 248, 141, 22);
 		panel.add(choixPoste);
 		
@@ -135,10 +135,9 @@ public class CreerJoueur extends JDialog {
 				int age = Integer.parseInt(EntreeAge.getText());
 				String nat = choixNat.getSelectedItem().toString();
 				String poste = choixPoste.getSelectedItem().toString();
-				String nomEquipe = "";
-				Joueur joueur = new Joueur(nom, prenom, age, nat, poste, nomEquipe);
-				listeJ.add(joueur);
-				System.out.println(listeJ.get(0));
+				Arbitre arbitre = new Arbitre(nom, prenom, age, nat, poste);
+				listeA.add(arbitre);
+				System.out.println(listeA.get(0));
 				dispose();
 			}
 		});
@@ -146,6 +145,7 @@ public class CreerJoueur extends JDialog {
 		button.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		button.setBackground(Color.WHITE);
 		button.setBounds(129, 308, 186, 23);
-		panel.add(button);		
+		panel.add(button);
+		
 	}
 }
