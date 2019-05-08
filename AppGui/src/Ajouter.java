@@ -35,7 +35,8 @@ public class Ajouter extends JDialog {
 	private JPanel contentPane;
 	private JTable table;
 	private ArrayList<Joueur> listeJ;
-
+	private ArrayList<Joueur> listeJSelec;
+	private String nomEquipe;
 	/**
 	 * Launch the application.
 	 */
@@ -54,7 +55,9 @@ public class Ajouter extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public Ajouter(int choix, int nb, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Match> listeMatch ) {
+	public Ajouter(int choix, int choixSelec, int nb, String nomEquipe, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueurSelec, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch ) {
+		this.nomEquipe = nomEquipe;
+		if (choixSelec == 1) {
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
@@ -66,7 +69,6 @@ public class Ajouter extends JDialog {
 		contentPane.setLayout(null);
 		
 		String titre = "";
-		String contenu = "";
 		Image imageQuitter = new ImageIcon(this.getClass().getResource("Quitter.png")).getImage();
 		
 
@@ -85,38 +87,43 @@ public class Ajouter extends JDialog {
 				titre = "Ajouter les compétitions :";
 			break;
 			case 2:
-				titre = "Ajouter un joueur :";
-				contenu = "Ajouter un joueur déjà séléctionné";
-				String nomColonnesJ[] = {"Nom","Prénom","Âge", "Nationnalité","Poste"};
-				Object[][] donneJ = new Object[listeJoueur.size()] [5];
-				JTable table = new JTable(donneJ, nomColonnesJ);
-				
-				table.setBounds(64, 128, 361, 174);		
-				for(int i = 0;i <listeJoueur.size();i++) {
-					donneJ[i][0] = listeJoueur.get(i).getnom();
+					titre = "Ajouter un joueur :";		
+					String nomColonnesJ[] = {"Nom","Prénom","Âge", "Nationnalité","Poste", "Equipe"};
+					Object[][] donneJ = new Object[listeJoueur.size()] [6];
+					JTable table = new JTable(donneJ, nomColonnesJ);
 					
-					donneJ[i][1] = listeJoueur.get(i).getprenom();
-					
-					donneJ[i][2] = listeJoueur.get(i).getage();
-					
-					donneJ[i][3] = listeJoueur.get(i).getnationnalite();
-					
-					donneJ[i][4] = listeJoueur.get(i).getposte();
-					
-				}
-				
-				Menu1.add(table);
-				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				table.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						int ligne = table.getSelectedRow();						
-						Joueur joueur = listeJoueur.get(table.convertRowIndexToModel(ligne));
-						listeJoueur.add(joueur);
-						setList(listeJoueur);
-						dispose();
+					table.setBounds(64, 128, 361, 174);		
+					for(int i = 0;i <listeJoueur.size();i++) {
+						donneJ[i][0] = listeJoueur.get(i).getnom();
+						
+						donneJ[i][1] = listeJoueur.get(i).getprenom();
+						
+						donneJ[i][2] = listeJoueur.get(i).getage();
+						
+						donneJ[i][3] = listeJoueur.get(i).getnationnalite();
+						
+						donneJ[i][4] = listeJoueur.get(i).getposte();
+						
+						donneJ[i][5] = listeJoueur.get(i).getEq();
+						
 					}
-				});							
+					
+					Menu1.add(table);
+					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					table.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mousePressed(MouseEvent e) {
+							int ligne = table.getSelectedRow();
+							int index = table.convertRowIndexToModel(ligne);
+							Joueur joueur = listeJoueur.get(index);
+							joueur.setEqJoueur(nomEquipe);
+							listeJoueur.remove(index);
+							listeJoueurSelec.add(joueur);
+							setListSelecJ(listeJoueurSelec);
+							dispose();
+						}
+					});
+											
 			break;
 			case 3:
 				titre = "Ajouter un arbitre :";
@@ -141,7 +148,6 @@ public class Ajouter extends JDialog {
 			break;
 			case 4:
 				titre = "Ajouter un entraînneur :";
-				contenu = "Ajouter un entraînneur déjà séléctionné";
 				String nomColonnesE[] = {"Nom","Prénom","Âge", "Nationnalité"};
 				Object[][] donneE = new Object[listeEntrainneur.size()] [4];
 				JTable tableE = new JTable(donneE,nomColonnesE);
@@ -158,10 +164,23 @@ public class Ajouter extends JDialog {
 				}
 				
 				Menu1.add(tableE);
+				tableE.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				tableE.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						int ligne = tableE.getSelectedRow();
+						int index = tableE.convertRowIndexToModel(ligne);
+						Entrainneur entrainneur = listeEntrainneur.get(index);
+						entrainneur.setEqEntrainneur(nomEquipe);
+						listeEntrainneur.remove(index);
+						listeEntrainneurSelec.add(entrainneur);
+						setListJ(listeJoueurSelec);
+						dispose();
+					}
+				});
 			break;
 			case 5:
-				titre = "Ajouter une équipe :";
-				contenu = "Ajouter les équipes déjà séléctionnés";
+				titre = "Ajouter une équipe :";				
 			break;
 			case 6:
 				titre = "Ajouter un match :";
@@ -186,50 +205,35 @@ public class Ajouter extends JDialog {
 		quitter1.setIcon(new ImageIcon(imageQuitter));
 		quitter1.setBounds(408, 11, 30, 36);
 		Menu1.add(quitter1);
-
-		
-	
-		JPanel Menu2 = new JPanel();
-		Menu2.setLayout(null);
-		Menu2.setBackground(new Color(91, 64, 153));
-		Parent.add(Menu2, "name_242634605874700");
-		
-		JLabel quitter2 = new JLabel("");
-		quitter2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		}		
+		else if (choixSelec == 2) {
+			if (choix == 2) {
+				CreerJoueur fenetreJ = new CreerJoueur(listeJoueurSelec, nomEquipe);
+				fenetreJ.setVisible(true);
 				dispose();
 			}
-		});
-		quitter2.setIcon(new ImageIcon(imageQuitter));
-		quitter2.setBounds(408, 11, 40, 36);
-		Menu2.add(quitter2);
-		
-		if (choix == 2 || choix == 4 || choix == 5) {
-			JButton btnContinuer = new JButton(contenu);
-			btnContinuer.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mousePressed(MouseEvent e) {
-					Parent.removeAll();
-					Parent.add(Menu2);
-					Parent.repaint();
-					Parent.revalidate();
-				}
-			});
-			btnContinuer.setForeground(new Color(91,64,153) );
-			btnContinuer.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-			
-			btnContinuer.setBackground(Color.WHITE);
-			btnContinuer.setBounds(106, 343, 269, 23);
-			Menu1.add(btnContinuer);
+			else if (choix == 4) {
+				CreerEntrainneur fenetreE = new CreerEntrainneur(listeEntrainneurSelec, nomEquipe);
+				fenetreE.setVisible(true);
+				dispose();
+			}
 		}
+		
 	}
 	
-	public void setList(ArrayList<Joueur> listeJoueur) {
+	public void setListJ(ArrayList<Joueur> listeJoueur) {
 		listeJ = listeJoueur;
 	}
 	
-	public ArrayList<Joueur> getList() {
+	public ArrayList<Joueur> getListJ() {
 		return listeJ;
+	}
+	
+	public void setListSelecJ(ArrayList<Joueur> listeJoueurSelec) {
+		listeJSelec = listeJoueurSelec;
+	}
+	
+	public ArrayList<Joueur> getListSelecJ() {
+		return listeJSelec;
 	}
 }

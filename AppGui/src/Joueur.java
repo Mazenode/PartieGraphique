@@ -20,7 +20,7 @@ public class Joueur extends Personne {
    }
   
   public void setEqJoueur(String nomEquipe){
-    this.nom = nomEquipe;
+    this.nomEquipe = nomEquipe;
 }
   public String getnom() {
       return nom;
@@ -37,5 +37,7 @@ public class Joueur extends Personne {
   public String getposte() {
       return poste;
   }
-  
+  public String getEq(){
+	    return this.nomEquipe;
+	}
 }

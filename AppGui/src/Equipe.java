@@ -2,26 +2,23 @@
 import java.util.*;
 
 public class Equipe {
-  int numEquipe;
+  int nbJoueurs;
   String nomEquipe;
   String ville;
   String pays;
-  int chx, nbJ,nbE,victoire=0,defaite=0,nul=0,but=0;
+  int victoire=0,defaite=0,nul=0,but=0;
   private List<Joueur> listeJoueurs;
   private Joueur j;
   private List<Entrainneur> listeEntraineurs;
   private String tactique;
   
-  public Equipe(String nom, /*int num,*/ String v, String p, List<Joueur> listeJoueurs, int choix, int nbJoueurs,int nbEntraineur, List<Entrainneur> listeEntraineurs){
+  public Equipe(String nom, int num, String v, String p, String tactique, List<Joueur> listeJoueurs, List<Entrainneur> listeEntraineurs){
       this.nomEquipe = nom;
-      //this.numEquipe = num;
+      this.nbJoueurs = num;
       this.ville = v;
       this.pays = p;
       this.listeJoueurs = listeJoueurs;
       this.listeEntraineurs = listeEntraineurs;
-      this.chx = choix;
-      this.nbJ = nbJoueurs;
-      this.nbE = nbEntraineur;
       this.tactique = tactique;
   }
   public Equipe(){

@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AjouterJoueur extends JFrame {
+public class AjouterEntrainneur extends JFrame {
 
 
 	/**
@@ -46,7 +46,7 @@ public class AjouterJoueur extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AjouterJoueur(int nb, String nomEquipe, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueurSelec, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch) {
+	public AjouterEntrainneur(String nomEquipe, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueur, ArrayList<Joueur> listeJoueurSelec, ArrayList<Equipe> listeEquipe, ArrayList<Equipe> listeEquipeSelec, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur,ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch) {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
@@ -57,7 +57,6 @@ public class AjouterJoueur extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		System.out.println(nb);
 		
 		ArrayList<String> listeTemp = new ArrayList();
 		String [] tactique = {"4-4-2 à plat", "4-4-2 en losange", "4-2-3-1", "4-3-3", "3-5-2", "3-4-3"};
@@ -84,13 +83,14 @@ public class AjouterJoueur extends JFrame {
 		lblCrerUnequipe.setFont(new Font("Segoe UI", Font.PLAIN, 23));
 		lblCrerUnequipe.setBounds(10, 60, 428, 47);
 		CreerEquipe2.add(lblCrerUnequipe);
-		
-		JButton btnAjouterUnJoueur = new JButton("Ajouter un joueur d\u00E9j\u00E0 \u00E9xistant");
+		int nb = 0;
+		JButton btnAjouterUnJoueur = new JButton("Ajouter un entra\u00EEneur d\u00E9j\u00E0 \u00E9xistant");
 		btnAjouterUnJoueur.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				dispose();				
-				Ajouter fenetre = new Ajouter(2, 1, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				
+				Ajouter fenetre = new Ajouter(4, 1, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
 				fenetre.setVisible(true);								
 			}
 		});
@@ -106,12 +106,12 @@ public class AjouterJoueur extends JFrame {
 		lblOu.setBounds(223, 218, 23, 23);
 		CreerEquipe2.add(lblOu);
 		
-		JButton btnCreerUnJoueur = new JButton("Cr\u00E9er un joueur puis l'ajouter");
+		JButton btnCreerUnJoueur = new JButton("Cr\u00E9er un entra\u00EEneur puis l'ajouter");
 		btnCreerUnJoueur.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				dispose();				
-				Ajouter fenetre = new Ajouter(2, 2, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				Ajouter fenetre = new Ajouter(4, 2, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
 				fenetre.setVisible(true);								
 			}
 		});

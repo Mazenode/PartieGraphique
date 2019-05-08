@@ -52,7 +52,7 @@ public class Afficher extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public Afficher(int choix, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Match> listeMatch ) {
+	public Afficher(int choix, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Match> listeMatch, ArrayList<Equipe> listeEquipeSelec, ArrayList<Joueur> listeJoueurSelec, ArrayList<Entrainneur> listeEntrainneurSelec ) {
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
@@ -83,7 +83,7 @@ public class Afficher extends JDialog {
 				titre = "Afficher les compétitions :";
 			break;
 			case 2:
-				titre = "Afficher les joueurs :";
+				titre = "Afficher les joueurs disponnibles :";
 				contenu = "Afficher les joueurs déjà séléctionnés";
 				String nomColonnesJ[] = {"Nom","Prénom","Âge", "Nationnalité","Poste"};
 				Object[][] donneJ = new Object[listeJoueur.size()] [5];
@@ -173,34 +173,15 @@ public class Afficher extends JDialog {
 		quitter1.setIcon(new ImageIcon(imageQuitter));
 		quitter1.setBounds(418, 11, 40, 36);
 		Menu1.add(quitter1);
-
-		
-	
-		JPanel Menu2 = new JPanel();
-		Menu2.setLayout(null);
-		Menu2.setBackground(new Color(91, 64, 153));
-		Parent.add(Menu2, "name_242634605874700");
-		
-		JLabel quitter2 = new JLabel("");
-		quitter2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				dispose();
-			}
-		});
-		quitter2.setIcon(new ImageIcon(imageQuitter));
-		quitter2.setBounds(418, 11, 40, 36);
-		Menu2.add(quitter2);
 		
 		if (choix == 2 || choix == 4 || choix == 5) {
 			JButton btnContinuer = new JButton(contenu);
 			btnContinuer.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					Parent.removeAll();
-					Parent.add(Menu2);
-					Parent.repaint();
-					Parent.revalidate();
+					dispose();
+					AfficherSelec fenetreSelec = new AfficherSelec(choix , listeEquipeSelec, listeJoueurSelec, listeEntrainneurSelec);
+					fenetreSelec.setVisible(true);
 				}
 			});
 			btnContinuer.setForeground(new Color(91,64,153) );

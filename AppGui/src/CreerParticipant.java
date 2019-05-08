@@ -59,7 +59,7 @@ public class CreerParticipant extends JDialog implements WindowListener{
 	}*/
 	
 	public CreerParticipant(ArrayList<Joueur> listeJoueur, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur) {
-
+		String nomEquipe = "Aucune";
 		setBounds(470, 250, 468, 411);
 		setResizable(false);
 		setUndecorated(true);
@@ -174,7 +174,7 @@ public class CreerParticipant extends JDialog implements WindowListener{
 							@Override
 							public void mousePressed(MouseEvent e) {
 								dispose();
-								CreerJoueur fenetreJ = new CreerJoueur(listeJoueur);
+								CreerJoueur fenetreJ = new CreerJoueur(listeJoueur, nomEquipe);
 								listeJ = fenetreJ.getList();
 								fenetreJ.setVisible(true);
 							}
@@ -206,7 +206,7 @@ public class CreerParticipant extends JDialog implements WindowListener{
 							@Override
 							public void mousePressed(MouseEvent e) {
 								dispose();
-								CreerEntrainneur fenetreE = new CreerEntrainneur(listeEntrainneur);
+								CreerEntrainneur fenetreE = new CreerEntrainneur(listeEntrainneur, nomEquipe);
 								listeE = fenetreE.getList();
 								fenetreE.setVisible(true);
 							}

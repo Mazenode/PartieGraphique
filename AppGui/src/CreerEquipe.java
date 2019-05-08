@@ -45,7 +45,7 @@ public class CreerEquipe extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreerEquipe(ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Match> listeMatch ) {
+	public CreerEquipe(ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueurSelec, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Equipe> listeEquipeSelec,ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
 		setResizable(false);
@@ -55,7 +55,6 @@ public class CreerEquipe extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		ArrayList<String> listeTemp = new ArrayList();
 		String [] tactique = {"4-4-2 à plat", "4-4-2 en losange", "4-2-3-1", "4-3-3", "3-5-2", "3-4-3"};
 		
 		JPanel Parent = new JPanel();
@@ -119,6 +118,10 @@ public class CreerEquipe extends JFrame {
 		lblPays.setBounds(48, 241, 59, 47);
 		CreerEquipe1.add(lblPays);
 		
+		JComboBox<String> choixTactique = new JComboBox<String>(tactique);
+		choixTactique.setBounds(149, 270, 141, 22);
+		CreerEquipe1.add(choixTactique);
+		
 		EntreePays = new JTextField();
 		EntreePays.setColumns(10);
 		EntreePays.setBounds(96, 254, 158, 20);
@@ -130,15 +133,21 @@ public class CreerEquipe extends JFrame {
 		btnContinuer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nomEquipe = EntreeNomEquipe.getText();
-				int nbJoueurs = Integer.parseInt(EntreeNbJoueur.getText())+1;
+				int nbJoueurs = Integer.parseInt(EntreeNbJoueur.getText());
 				String ville = EntreeVille.getText();
 				String pays = EntreePays.getText();
-				//String poste = choixTactique.getSelectedItem().toString();			
+				String poste = choixTactique.getSelectedItem().toString();	
+				Equipe equipe = new Equipe(nomEquipe, nbJoueurs, ville, pays, choixTactique, listeJoueur, listeEntrainneur);
+				listeJ.add(joueur);
+				System.out.println(listeJ.get(0));
+				setList(listeJ);
 				dispose();
 				for (int i = 0; i < nbJoueurs; i++) {
-				AjouterJoueur fenetreAj = new AjouterJoueur(nbJoueurs - 1, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
+				AjouterJoueur fenetreAj = new AjouterJoueur(nbJoueurs, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
 				fenetreAj.setVisible(true);
-				}
+				}		
+				AjouterEntrainneur fenetreEn = new AjouterEntrainneur(nomEquipe, listeCompet, listeJoueur, listeJoueurSelec, listeEquipe, listeEquipeSelec, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				fenetreEn.setVisible(true);
 			}
 		});
 		btnContinuer.setBackground(Color.WHITE);

@@ -16,7 +16,7 @@ public class Entrainneur /*extends Personne */{
       nomEquipe = EnEq;
   }
   public void setEqEntrainneur(String nomEquipe){
-    this.nom = nomEquipe;
+    this.nomEquipe = nomEquipe;
 }
   @Override
   public String toString() {

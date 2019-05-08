@@ -48,8 +48,8 @@ public class CreerEntrainneur extends JDialog {
 	 * Create the frame.
 	 */
 	
-	public CreerEntrainneur(ArrayList<Entrainneur> listeE) {
-		setBounds(470, 250, 448, 378);
+	public CreerEntrainneur(ArrayList<Entrainneur> listeE, String nomEquipe) {
+		setBounds(470, 250, 468, 424);
 		setResizable(false);
 		setUndecorated(true);
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -61,7 +61,7 @@ public class CreerEntrainneur extends JDialog {
 		String[] nationnalites = { "Allemand", "Argentin", "Belge", "Bresilien", "Sud Coréen", "Espagnol", "Français","Islandais", "Italien", "Portugais","Russe" };
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 428, 356);
+		panel.setBounds(10, 11, 448, 402);
 		panel.setLayout(null);
 		panel.setBackground(new Color(91, 64, 153));
 		contentPane.add(panel);
