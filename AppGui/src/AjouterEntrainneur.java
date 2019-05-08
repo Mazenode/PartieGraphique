@@ -90,7 +90,7 @@ public class AjouterEntrainneur extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				dispose();				
 				
-				Ajouter fenetre = new Ajouter(4, 1, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				Ajouter fenetre = new Ajouter(4, 1, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeEquipeSelec, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
 				fenetre.setVisible(true);								
 			}
 		});
@@ -111,7 +111,7 @@ public class AjouterEntrainneur extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				dispose();				
-				Ajouter fenetre = new Ajouter(4, 2, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				Ajouter fenetre = new Ajouter(4, 2, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeEquipeSelec,listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
 				fenetre.setVisible(true);								
 			}
 		});

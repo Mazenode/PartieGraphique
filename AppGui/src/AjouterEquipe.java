@@ -26,7 +26,7 @@ public class AjouterEquipe extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private int nb = 0;
-	private ArrayList<Joueur> listeEquipe;
+	private ArrayList<Equipe> listeEquipeLocale;
 
 	/**
 	 * Launch the application.
@@ -46,7 +46,7 @@ public class AjouterEquipe extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AjouterEquipe(int nb, String nomEquipe, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueurSelec, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch) {
+	public AjouterEquipe(int nb, String nomEquipe, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueurSelec, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Equipe> listeEquipeSelec, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch) {
 		this.nb = nb;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
@@ -85,27 +85,35 @@ public class AjouterEquipe extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				dispose();								
-				Ajouter fenetre = new Ajouter(2, 1, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				Ajouter fenetre = new Ajouter(5, 1, 1, nomEquipe, listeCompet, listeJoueurSelec,listeJoueur,listeEquipe, listeEquipeSelec, listeArbitre,listeEntrainneur,listeEntrainneurSelec, listeMatch);
 				fenetre.setVisible(true);								
 			}
 		});
 		btnAjouterUnequipe.setForeground(new Color(91, 64, 153));
 		btnAjouterUnequipe.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		btnAjouterUnequipe.setBackground(Color.WHITE);
-		btnAjouterUnequipe.setBounds(111, 163, 249, 23);
+		btnAjouterUnequipe.setBounds(103, 164, 249, 23);
 		CreerEquipe2.add(btnAjouterUnequipe);
 		
 		JLabel lblOu = new JLabel("ou");
 		lblOu.setForeground(Color.WHITE);
 		lblOu.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		lblOu.setBounds(221, 196, 23, 23);
+		lblOu.setBounds(213, 197, 23, 23);
 		CreerEquipe2.add(lblOu);
 		
 		JButton btnCrerUnequipe = new JButton("Cr\u00E9er une \u00E9quipe puis l'ajouter");
 		btnCrerUnequipe.setForeground(new Color(91, 64, 153));
 		btnCrerUnequipe.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		btnCrerUnequipe.setBackground(Color.WHITE);
-		btnCrerUnequipe.setBounds(111, 230, 249, 23);
+		btnCrerUnequipe.setBounds(103, 231, 249, 23);
 		CreerEquipe2.add(btnCrerUnequipe);
+	}
+	
+	public void setListeEquipeLocale(ArrayList<Equipe> listeEquipeLocale) {
+		this.listeEquipeLocale = listeEquipeLocale;
+	}
+	
+	public ArrayList<Equipe> getListeEquipeLocale() {
+		return this.listeEquipeLocale;
 	}
 }

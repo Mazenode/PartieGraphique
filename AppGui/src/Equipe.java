@@ -7,9 +7,9 @@ public class Equipe {
   String ville;
   String pays;
   int victoire=0,defaite=0,nul=0,but=0;
-  private List<Joueur> listeJoueurs;
+  public List<Joueur> listeJoueurs;
   private Joueur j;
-  private List<Entrainneur> listeEntraineurs;
+  public List<Entrainneur> listeEntraineurs;
   private String tactique;
   
   public Equipe(String nom, int num, String v, String p, String tactique, List<Joueur> listeJoueurs, List<Entrainneur> listeEntraineurs){
@@ -26,7 +26,7 @@ public class Equipe {
    }
 
   
-  public List<Joueur> getJoueur() {
+  public List<Joueur> getListeJoueur() {
       return listeJoueurs;
   }
 
@@ -48,7 +48,7 @@ public class Equipe {
       nomEquipe = nom;
   }
   
-  public void printJoueurs() {
+  /*public void printJoueurs() {
       for (int i = 0; i < nbJ; i++) {
           System.out.println(listeJoueurs.get(i));
       }
@@ -58,7 +58,7 @@ public class Equipe {
         for (int e = 0; e < nbE; e++) {
           System.out.println(listeEntraineurs.get(e));
       }
-    }
+    }*/
   // ajout des scores/victoire/defaite
   public void addScore(int b){
       but += b;
@@ -88,9 +88,23 @@ public class Equipe {
       nul += n;
   }
  
-  public int getNul(){
-      return nul;
+  public String getNomEquipe(){
+      return this.nomEquipe;
   }
+  
+  public int getNbJoueurs(){
+      return this.nbJoueurs;
+  }
+  public String getVille(){
+      return this.ville;
+  }
+  public String getPays(){
+      return this.pays;
+  }
+  public String getTactique(){
+      return this.tactique;
+  }
+
 }
   
    

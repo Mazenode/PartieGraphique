@@ -9,6 +9,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 
@@ -30,8 +31,7 @@ public class CreerCompet extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreerCompet creerCompet = new CreerCompet();
-					creerCompet.setVisible(true);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,7 +42,7 @@ public class CreerCompet extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreerCompet() {
+	public CreerCompet(ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueurSelec, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Equipe> listeEquipeSelec,ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
 		setResizable(false);
@@ -101,52 +101,18 @@ public class CreerCompet extends JFrame {
 		CreerCompet1.add(EntreeLieuCompet);
 		EntreeLieuCompet.setColumns(10);
 		
-		JPanel CreerCompet2 = new JPanel();
-		
 		JButton btnContinuer = new JButton("Continuer");
 		btnContinuer.setForeground(new Color(91,64,153) );
 		btnContinuer.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		btnContinuer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Parent.removeAll();
-				Parent.add(CreerCompet2);
-				Parent.repaint();
-				Parent.revalidate();
+				dispose();
+				AjouterEquipe fenetreEq = new AjouterEquipe(0, "Aucune", listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeEquipeSelec, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				fenetreEq.setVisible(true);
 			}
 		});
 		btnContinuer.setBackground(Color.WHITE);
 		btnContinuer.setBounds(140, 344, 186, 23);
 		CreerCompet1.add(btnContinuer);
-		
-		
-		CreerCompet2.setLayout(null);
-		CreerCompet2.setBackground(new Color(91, 64, 153));
-		Parent.add(CreerCompet2, "name_149922086670100");
-		
-		JLabel label = new JLabel("Cr\u00E9er une comp\u00E9tition :");
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Segoe UI", Font.PLAIN, 23));
-		label.setBounds(112, 62, 249, 47);
-		CreerCompet2.add(label);
-		
-		JButton btnAjouterUnequipe = new JButton("Ajouter une \u00E9quipe \u00E9xistante");
-		btnAjouterUnequipe.setForeground(new Color(91, 64, 153));
-		btnAjouterUnequipe.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-		btnAjouterUnequipe.setBackground(Color.WHITE);
-		btnAjouterUnequipe.setBounds(112, 186, 249, 23);
-		CreerCompet2.add(btnAjouterUnequipe);
-		
-		JLabel lblOu = new JLabel("ou");
-		lblOu.setForeground(Color.WHITE);
-		lblOu.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		lblOu.setBounds(222, 219, 23, 23);
-		CreerCompet2.add(lblOu);
-		
-		JButton btnCrerUnequipe = new JButton("Cr\u00E9er une \u00E9quipe puis l'ajouter");
-		btnCrerUnequipe.setForeground(new Color(91, 64, 153));
-		btnCrerUnequipe.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-		btnCrerUnequipe.setBackground(Color.WHITE);
-		btnCrerUnequipe.setBounds(112, 253, 249, 23);
-		CreerCompet2.add(btnCrerUnequipe);
 	}
 }

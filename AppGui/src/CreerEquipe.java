@@ -26,7 +26,8 @@ public class CreerEquipe extends JFrame {
 	private JTextField EntreeNbJoueur;
 	private JTextField EntreeVille;
 	private JTextField EntreePays;
-
+	private ArrayList<Joueur> listeJoueurPourCetteEquipe= new ArrayList();
+	private ArrayList<Entrainneur> listeEntrainneurPourCetteEquipe= new ArrayList();
 	/**
 	 * Launch the application.
 	 */
@@ -137,21 +138,33 @@ public class CreerEquipe extends JFrame {
 				String ville = EntreeVille.getText();
 				String pays = EntreePays.getText();
 				String poste = choixTactique.getSelectedItem().toString();	
-				Equipe equipe = new Equipe(nomEquipe, nbJoueurs, ville, pays, choixTactique, listeJoueur, listeEntrainneur);
-				listeJ.add(joueur);
-				System.out.println(listeJ.get(0));
-				setList(listeJ);
-				dispose();
+				
 				for (int i = 0; i < nbJoueurs; i++) {
-				AjouterJoueur fenetreAj = new AjouterJoueur(nbJoueurs, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
-				fenetreAj.setVisible(true);
+					AjouterJoueur fenetreAj = new AjouterJoueur(nbJoueurs, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeEquipeSelec, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+					fenetreAj.getEq();
+					fenetreAj.setVisible(true);
+					listeJoueurPourCetteEquipe = fenetreAj.getListeJoueurPourCetteEquipe();
+					setList(listeJoueurPourCetteEquipe);
+				
 				}		
 				AjouterEntrainneur fenetreEn = new AjouterEntrainneur(nomEquipe, listeCompet, listeJoueur, listeJoueurSelec, listeEquipe, listeEquipeSelec, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
 				fenetreEn.setVisible(true);
+				Equipe equipe = new Equipe(nomEquipe, nbJoueurs, ville, pays, poste, listeJoueurPourCetteEquipe, listeEntrainneurPourCetteEquipe);				
+				listeEquipe.add(equipe);			
+				//setList(listeEquipe);
+				dispose();
 			}
 		});
 		btnContinuer.setBackground(Color.WHITE);
 		btnContinuer.setBounds(140, 344, 186, 23);
 		CreerEquipe1.add(btnContinuer);
+	}
+	
+	public void setList(ArrayList<Joueur> listeJ) {
+		listeJoueurPourCetteEquipe = listeJ;
+	}
+	
+	public ArrayList<Joueur> getList() {
+		return listeJoueurPourCetteEquipe;
 	}
 }

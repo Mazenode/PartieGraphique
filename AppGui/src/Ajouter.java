@@ -34,9 +34,15 @@ public class Ajouter extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	//Liste Joueurs non selec
 	private ArrayList<Joueur> listeJ;
+	//Liste Joueurs selec
 	private ArrayList<Joueur> listeJSelec;
+	//Liste Joueurs que je veux dans mon équipe
+	private ArrayList<Joueur> listeJoueurPourCetteEquipe;
 	private String nomEquipe;
+	public ArrayList<Equipe> listeEquipeLocale;
+	private ArrayList<Equipe> listEqSelec;
 	/**
 	 * Launch the application.
 	 */
@@ -55,7 +61,11 @@ public class Ajouter extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public Ajouter(int choix, int choixSelec, int nb, String nomEquipe, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueurSelec, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch ) {
+	public Ajouter(int choix, int choixSelec, int nb, String nomEquipe, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueurSelec, ArrayList<Joueur> listeJoueur,
+			
+			ArrayList<Equipe> listeEquipe,ArrayList<Equipe> listeEquipeSelec, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur,
+			
+			ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch  ) {
 		this.nomEquipe = nomEquipe;
 		if (choixSelec == 1) {
 
@@ -113,12 +123,15 @@ public class Ajouter extends JDialog {
 					table.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mousePressed(MouseEvent e) {
+							ArrayList<Joueur> listeJoueurPourCetteEquipe = new ArrayList();
 							int ligne = table.getSelectedRow();
 							int index = table.convertRowIndexToModel(ligne);
 							Joueur joueur = listeJoueur.get(index);
 							joueur.setEqJoueur(nomEquipe);
 							listeJoueur.remove(index);
 							listeJoueurSelec.add(joueur);
+							listeJoueurPourCetteEquipe.add(joueur);
+							setListeJoueurPourCetteEquipe(listeJoueurPourCetteEquipe);
 							setListSelecJ(listeJoueurSelec);
 							dispose();
 						}
@@ -180,7 +193,40 @@ public class Ajouter extends JDialog {
 				});
 			break;
 			case 5:
-				titre = "Ajouter une équipe :";				
+				titre = "Ajouter une équipe :";	
+				titre = "Ajouter une équipe :";
+				String nomColonnesEq[] = {"Nom équipe","Nb Joueurs","Ville", "Pays", ""};
+				Object[][] donneEq = new Object[listeEquipe.size()] [5];
+				JTable tableEq = new JTable(donneEq,nomColonnesEq);
+				
+				tableEq.setBounds(64, 128, 361, 174);		
+				for(int i = 0;i <listeEquipe.size();i++) {
+					donneEq[i][0] = listeEquipe.get(i).getNomEquipe();
+					
+					donneEq[i][1] = listeEquipe.get(i).getNbJoueurs();
+					
+					donneEq[i][2] = listeEquipe.get(i).getVille();
+					
+					donneEq[i][3] = listeEquipe.get(i).getPays();	
+					
+					donneEq[i][4] = listeEquipe.get(i).getTactique();	
+				}
+				
+				Menu1.add(tableEq);
+				tableEq.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				tableEq.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						ArrayList<Equipe> listeEquipeLocale = new ArrayList();
+						int ligne = tableEq.getSelectedRow();
+						int index = tableEq.convertRowIndexToModel(ligne);
+						Equipe equipe = listeEquipe.get(index);
+						listeEquipeLocale.add(equipe);
+						setListeEquipeLocale(listeEquipeLocale);
+						setListSelecEq(listeEquipeSelec);
+						dispose();
+					}
+				});
 			break;
 			case 6:
 				titre = "Ajouter un match :";
@@ -212,6 +258,11 @@ public class Ajouter extends JDialog {
 				fenetreJ.setVisible(true);
 				dispose();
 			}
+			else if (choix == 3) {
+				CreerArbitre fenetreA = new CreerArbitre(listeArbitre);
+				fenetreA.setVisible(true);
+				dispose();
+			}
 			else if (choix == 4) {
 				CreerEntrainneur fenetreE = new CreerEntrainneur(listeEntrainneurSelec, nomEquipe);
 				fenetreE.setVisible(true);
@@ -235,5 +286,30 @@ public class Ajouter extends JDialog {
 	
 	public ArrayList<Joueur> getListSelecJ() {
 		return listeJSelec;
+	}
+	
+	public void setListSelecEq(ArrayList<Equipe> listeEquipeSelec) {
+		listEqSelec = listeEquipeSelec;
+	}
+	
+	public ArrayList<Equipe> getListEquipeLocale() {
+		return listEqSelec;
+	}
+	
+	public void setListeEquipeLocale(ArrayList<Equipe> listeEquipe) {
+		this.listeEquipeLocale = listeEquipe;
+	}
+	
+	public ArrayList<Equipe> getListeEquipeLocale() {
+		return this.listeEquipeLocale;
+	}
+	
+	public void setListeJoueurPourCetteEquipe(ArrayList<Joueur> listeJoueurPourCetteEquipe) {
+		this.listeJoueurPourCetteEquipe = listeJoueurPourCetteEquipe;
+		System.out.println("Etape 1 Dans la fonction- "+ this.listeJoueurPourCetteEquipe);
+	}
+	
+	public ArrayList<Joueur> getListeJoueurPourCetteEquipeAjouter() {
+		return this.listeJoueurPourCetteEquipe;
 	}
 }

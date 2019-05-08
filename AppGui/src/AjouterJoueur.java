@@ -16,6 +16,8 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class AjouterJoueur extends JFrame {
 
@@ -27,6 +29,7 @@ public class AjouterJoueur extends JFrame {
 	private JPanel contentPane;
 	public int nombre;
 	private ArrayList<Joueur> listeJoueur;
+	private ArrayList<Joueur> listeJoueurPourCetteEquipe;
 
 	/**
 	 * Launch the application.
@@ -46,8 +49,8 @@ public class AjouterJoueur extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AjouterJoueur(int nb, String nomEquipe, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueurSelec, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch) {
-
+	public AjouterJoueur(int nb, String nomEquipe, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueurSelec, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Equipe> listeEquipeSelec, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Entrainneur> listeEntrainneurSelec, ArrayList<Match> listeMatch) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
 		setResizable(false);
@@ -90,8 +93,15 @@ public class AjouterJoueur extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				dispose();				
-				Ajouter fenetre = new Ajouter(2, 1, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
-				fenetre.setVisible(true);								
+				Ajouter fenetre = new Ajouter(2, 1, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeEquipeSelec, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				setListeJoueurPourCetteEquipe(fenetre.getListeJoueurPourCetteEquipeAjouter());	
+				fenetre.addWindowListener(new WindowAdapter() {
+					public void windowClosed(WindowEvent e) {
+						System.out.println("Etape 2 - "+fenetre.getListeJoueurPourCetteEquipeAjouter());	
+					}
+				});		
+				fenetre.setVisible(true);				
+
 			}
 		});
 		btnAjouterUnJoueur.setForeground(new Color(91, 64, 153));
@@ -111,7 +121,14 @@ public class AjouterJoueur extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				dispose();				
-				Ajouter fenetre = new Ajouter(2, 2, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				Ajouter fenetre = new Ajouter(2, 2, nb, nomEquipe, listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeEquipeSelec ,listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				setListeJoueurPourCetteEquipe(fenetre.getListeJoueurPourCetteEquipeAjouter());		
+				fenetre.addWindowListener(new WindowAdapter() {
+					public void windowClosed(WindowEvent e) {
+						System.out.println("Etape 2 - "+fenetre.getListeJoueurPourCetteEquipeAjouter());	
+					}
+				});		
+				
 				fenetre.setVisible(true);								
 			}
 		});
@@ -119,8 +136,23 @@ public class AjouterJoueur extends JFrame {
 		btnCreerUnJoueur.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		btnCreerUnJoueur.setBackground(Color.WHITE);
 		btnCreerUnJoueur.setBounds(104, 251, 249, 23);
-		CreerEquipe2.add(btnCreerUnJoueur);
-		
+		CreerEquipe2.add(btnCreerUnJoueur);		
 		nombre = nb;
+	}
+	
+	public void setEq(ArrayList<Joueur> listeJoueur) {
+		this.listeJoueur = listeJoueur;
+	}
+	
+	public ArrayList<Joueur> getEq() {
+		return this.listeJoueur;
+	}
+	
+	public void setListeJoueurPourCetteEquipe(ArrayList<Joueur> listeJoueurPourCetteEquipe) {
+		this.listeJoueurPourCetteEquipe = listeJoueurPourCetteEquipe;
+	}
+	
+	public ArrayList<Joueur> getListeJoueurPourCetteEquipe() {
+		return this.listeJoueurPourCetteEquipe;
 	}
 }

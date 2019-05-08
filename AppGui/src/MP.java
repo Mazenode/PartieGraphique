@@ -66,6 +66,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 	     
 	     listeJoueur.add(new Joueur("Aubry","Mathieu",19,"France","Attaquant", "aucune"));
 		 listeJoueur.add(new Joueur("Chaignaud","Quentin",20,"France","Attaquant","aucune"));
+		 listeEquipe.add(new Equipe("Ajax", 4, "Amsterdam", "Pays-Bas", "3-2-2", listeJoueur, listeEntrainneur));
 		
 		Menu = new JFrame();
 		Menu.getContentPane().setLayout(null);
@@ -272,7 +273,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				CreerCompet creerCompet = new CreerCompet();
+				CreerCompet creerCompet = new CreerCompet(listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeEquipeSelec, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
 				creerCompet.setVisible(true);
 				cache.setVisible(true);
 			}
@@ -323,8 +324,18 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 				BoutonCreerCompet.setBackground(new Color(91,64,153));
 				BoutonCreerEquipe.setBackground(new Color(91,64,153));
 				BoutonCreerParticipant.setBackground(new Color(91,64,153));
-				BoutonCreerMatch.setBackground(new Color(100, 84, 163));
-			
+				BoutonCreerMatch.setBackground(new Color(100, 84, 163));			
+			}
+			@Override
+			public void mousePressed(MouseEvent arg0) {		
+				CreerMatch creerMatch = new CreerMatch(listeCompet, listeJoueurSelec, listeJoueur, listeEquipe, listeEquipeSelec, listeArbitre, listeEntrainneur, listeEntrainneurSelec, listeMatch);
+				cache.setVisible(true);
+				creerMatch.setVisible(true);
+				creerMatch.addWindowListener(new WindowAdapter() {
+					public void windowClosed(WindowEvent e) {
+						cache.setVisible(false);	
+					}
+				});
 			}
 		});
 		

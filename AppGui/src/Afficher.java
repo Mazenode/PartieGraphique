@@ -149,6 +149,24 @@ public class Afficher extends JDialog {
 			case 5:
 				titre = "Afficher les équipes :";
 				contenu = "Afficher les équipes déjà séléctionnés";
+				String nomColonnesEq[] = {"Nom équipe","Nb Joueurs","Ville", "Pays", ""};
+				Object[][] donneEq = new Object[listeEquipe.size()] [5];
+				JTable tableEq = new JTable(donneEq,nomColonnesEq);
+				
+				tableEq.setBounds(64, 128, 361, 174);		
+				for(int i = 0;i <listeEquipe.size();i++) {
+					donneEq[i][0] = listeEquipe.get(i).getNomEquipe();
+					
+					donneEq[i][1] = listeEquipe.get(i).getNbJoueurs();
+					
+					donneEq[i][2] = listeEquipe.get(i).getVille();
+					
+					donneEq[i][3] = listeEquipe.get(i).getPays();	
+					
+					donneEq[i][4] = listeEquipe.get(i).getTactique();	
+				}
+				
+				Menu1.add(tableEq);
 			break;
 			case 6:
 				titre = "Afficher les matchs :";
