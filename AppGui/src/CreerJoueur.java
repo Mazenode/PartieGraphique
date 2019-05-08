@@ -27,6 +27,7 @@ public class CreerJoueur extends JDialog {
 	private JTextField EntreeNom;
 	private JTextField EntreeAge;
 	private JTextField EntreePrenom;
+	private ArrayList<Joueur> listeJ;
 
 	/**
 	 * Launch the application.
@@ -139,13 +140,23 @@ public class CreerJoueur extends JDialog {
 				Joueur joueur = new Joueur(nom, prenom, age, nat, poste, nomEquipe);
 				listeJ.add(joueur);
 				System.out.println(listeJ.get(0));
+				setList(listeJ);
 				dispose();
 			}
 		});
+		
 		button.setForeground(new Color(91, 64, 153));
 		button.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		button.setBackground(Color.WHITE);
 		button.setBounds(129, 308, 186, 23);
 		panel.add(button);		
+	}
+	
+	public void setList(ArrayList<Joueur> listeJoueur) {
+		listeJ = listeJoueur;
+	}
+	
+	public ArrayList<Joueur> getList() {
+		return listeJ;
 	}
 }

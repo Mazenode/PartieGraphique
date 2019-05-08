@@ -22,4 +22,17 @@ public class Entrainneur /*extends Personne */{
   public String toString() {
         return String.format("Nom: %s; Prénom: %s; Age: %d; Nationnalité: %s; Equipe entrainner: %s; ",nom, prenom, age, nationnalite,nomEquipe);
    }
+  
+  public String getnom() {
+      return nom;
+  }
+  public String getprenom() {
+      return prenom;
+  }
+  public int getage() {
+      return age;
+  }
+  public String getnationnalite() {
+      return nationnalite;
+  }
 }

@@ -19,4 +19,20 @@ public class Arbitre extends Personne {
                     "Age : "+ this.age +
                     " Nationnalité : " + this.nationnalite + " et c'est un "+ this.poste + ".");
    }
+  
+  public String getnom() {
+      return nom;
+  }
+  public String getprenom() {
+      return prenom;
+  }
+  public int getage() {
+      return age;
+  }
+  public String getnationnalite() {
+      return nationnalite;
+  }
+  public String getposte() {
+      return poste;
+  }
 }

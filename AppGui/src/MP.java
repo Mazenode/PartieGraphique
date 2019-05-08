@@ -60,6 +60,8 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 	     ArrayList<Competition> listeCompet = new ArrayList();
 	     ArrayList<Match> listeMatch = new ArrayList();
 	     ArrayList<Equipe> listeEquipe = new ArrayList();
+	     listeJoueur.add(new Joueur("Aubry","Mathieu",19,"France","Attaquant", "aucune"));
+		 listeJoueur.add(new Joueur("Chaignaud","Quentin",20,"France","Attaquant","aucune"));
 		
 		Menu = new JFrame();
 		Menu.getContentPane().setLayout(null);
@@ -281,7 +283,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {				
-				CreerParticipant creerParticipant = new CreerParticipant(/*listeJoueur, listeArbitre, listeEntrainneur*/);
+				CreerParticipant creerParticipant = new CreerParticipant(listeJoueur, listeArbitre, listeEntrainneur);
 				cache.setVisible(true);
 				creerParticipant.setVisible(true);
 				creerParticipant.addWindowListener(new WindowAdapter() {
@@ -301,7 +303,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				CreerEquipe creerEquipe = new CreerEquipe(listeJoueur, listeEquipe);
+				CreerEquipe creerEquipe = new CreerEquipe(listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
 				cache.setVisible(true);
 				creerEquipe.setVisible(true);
 				creerEquipe.addWindowListener(new WindowAdapter() {
@@ -487,7 +489,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Afficher afficherCompet = new Afficher(1);
+				Afficher afficherCompet = new Afficher(1, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
 				cache.setVisible(true);
 				afficherCompet.setVisible(true);
 				afficherCompet.addWindowListener(new WindowAdapter() {
@@ -510,7 +512,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Afficher afficherJoueurs = new Afficher(2);
+				Afficher afficherJoueurs = new Afficher(2, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
 				cache.setVisible(true);
 				afficherJoueurs.setVisible(true);
 				afficherJoueurs.addWindowListener(new WindowAdapter() {
@@ -533,7 +535,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Afficher afficherEntrainneurs = new Afficher(3);
+				Afficher afficherEntrainneurs = new Afficher(3, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
 				cache.setVisible(true);
 				afficherEntrainneurs.setVisible(true);
 				afficherEntrainneurs.addWindowListener(new WindowAdapter() {
@@ -556,7 +558,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Afficher afficherEntrainneurs = new Afficher(4);
+				Afficher afficherEntrainneurs = new Afficher(4, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
 				cache.setVisible(true);
 				afficherEntrainneurs.setVisible(true);
 				afficherEntrainneurs.addWindowListener(new WindowAdapter() {
@@ -579,7 +581,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Afficher afficherEquipes = new Afficher(5);
+				Afficher afficherEquipes = new Afficher(5, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
 				cache.setVisible(true);
 				afficherEquipes.setVisible(true);
 				afficherEquipes.addWindowListener(new WindowAdapter() {
@@ -602,7 +604,7 @@ public class MP extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Afficher afficherMatchs = new Afficher(6);
+				Afficher afficherMatchs = new Afficher(6, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
 				cache.setVisible(true);
 				afficherMatchs.setVisible(true);
 				afficherMatchs.addWindowListener(new WindowAdapter() {

@@ -25,7 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class Afficher extends JDialog {
+public class Ajouter extends JDialog {
 
 	/**
 	 * 
@@ -52,7 +52,7 @@ public class Afficher extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public Afficher(int choix, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Match> listeMatch ) {
+	public Ajouter(int choix, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Match> listeMatch ) {
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
@@ -69,7 +69,7 @@ public class Afficher extends JDialog {
 		
 
 		JPanel Parent = new JPanel();
-		Parent.setBounds(0, 0, 468, 411);
+		Parent.setBounds(10, 11, 448, 389);
 		contentPane.add(Parent);
 		Parent.setLayout(new CardLayout(0, 0));
 				
@@ -80,11 +80,11 @@ public class Afficher extends JDialog {
 		
 		switch (choix) {
 			case 1:
-				titre = "Afficher les compétitions :";
+				titre = "Ajouter les compétitions :";
 			break;
 			case 2:
-				titre = "Afficher les joueurs :";
-				contenu = "Afficher les joueurs déjà séléctionnés";
+				titre = "Ajouter un joueur :";
+				contenu = "Ajouter un joueur déjà séléctionné";
 				String nomColonnesJ[] = {"Nom","Prénom","Âge", "Nationnalité","Poste"};
 				Object[][] donneJ = new Object[listeJoueur.size()] [5];
 				JTable table = new JTable(donneJ, nomColonnesJ);
@@ -104,9 +104,12 @@ public class Afficher extends JDialog {
 				}
 				
 				Menu1.add(table);
+				/**int ligne = table.getSelectedRow();
+				Joueur joueur = listeJoueur.get(table.convertRowIndexToModel(ligne));
+				System.out.println(joueur);*/
 			break;
 			case 3:
-				titre = "Afficher les arbitres :";
+				titre = "Ajouter un arbitre :";
 				String nomColonnesA[] = {"Nom","Prénom","Âge", "Nationnalité", "Poste"};
 				Object[][] donneA = new Object[listeArbitre.size()] [5];
 				JTable tableA = new JTable(donneA,nomColonnesA);
@@ -127,8 +130,8 @@ public class Afficher extends JDialog {
 				Menu1.add(tableA);
 			break;
 			case 4:
-				titre = "Afficher les entraînneurs :";
-				contenu = "Afficher les entraînneurs déjà séléctionnés";
+				titre = "Ajouter un entraînneur :";
+				contenu = "Ajouter un entraînneur déjà séléctionné";
 				String nomColonnesE[] = {"Nom","Prénom","Âge", "Nationnalité"};
 				Object[][] donneE = new Object[listeEntrainneur.size()] [4];
 				JTable tableE = new JTable(donneE,nomColonnesE);
@@ -147,20 +150,13 @@ public class Afficher extends JDialog {
 				Menu1.add(tableE);
 			break;
 			case 5:
-				titre = "Afficher les équipes :";
-				contenu = "Afficher les équipes déjà séléctionnés";
+				titre = "Ajouter une équipe :";
+				contenu = "Ajouter les équipes déjà séléctionnés";
 			break;
 			case 6:
-				titre = "Afficher les matchs :";
+				titre = "Ajouter un match :";
 			break;
 		}
-				
-		JLabel TitreCreerEquipe = new JLabel(titre);
-		TitreCreerEquipe.setHorizontalAlignment(SwingConstants.CENTER);
-		TitreCreerEquipe.setForeground(Color.WHITE);
-		TitreCreerEquipe.setFont(new Font("Segoe UI", Font.PLAIN, 23));
-		TitreCreerEquipe.setBounds(10, 23, 448, 47);
-		Menu1.add(TitreCreerEquipe);
 		
 		
 		JLabel quitter1 = new JLabel("");
@@ -170,8 +166,15 @@ public class Afficher extends JDialog {
 				dispose();
 			}
 		});
+		
+		JLabel TitreCreerEquipe = new JLabel(titre);
+		TitreCreerEquipe.setHorizontalAlignment(SwingConstants.CENTER);
+		TitreCreerEquipe.setForeground(Color.WHITE);
+		TitreCreerEquipe.setFont(new Font("Segoe UI", Font.PLAIN, 23));
+		TitreCreerEquipe.setBounds(0, 26, 448, 47);
+		Menu1.add(TitreCreerEquipe);
 		quitter1.setIcon(new ImageIcon(imageQuitter));
-		quitter1.setBounds(418, 11, 40, 36);
+		quitter1.setBounds(408, 11, 30, 36);
 		Menu1.add(quitter1);
 
 		

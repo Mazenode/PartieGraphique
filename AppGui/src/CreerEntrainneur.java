@@ -27,6 +27,7 @@ public class CreerEntrainneur extends JDialog {
 	private JTextField EntreeNom;
 	private JTextField EntreeAge;
 	private JTextField EntreePrenom;
+	private ArrayList<Entrainneur> listeE;
 
 	/**
 	 * Launch the application.
@@ -127,6 +128,7 @@ public class CreerEntrainneur extends JDialog {
 				Entrainneur entrainneur = new Entrainneur(nom, prenom, age, nat, nomEquipe);
 				listeE.add(entrainneur);
 				System.out.println(listeE.get(0));
+				setList(listeE);
 				dispose();
 			}
 		});
@@ -135,5 +137,13 @@ public class CreerEntrainneur extends JDialog {
 		button.setBackground(Color.WHITE);
 		button.setBounds(129, 308, 186, 23);
 		panel.add(button);		
+	}
+	
+	public void setList(ArrayList<Entrainneur> listeEntrainneur) {
+		listeE = listeEntrainneur;
+	}
+	
+	public ArrayList<Entrainneur> getList() {
+		return listeE;
 	}
 }

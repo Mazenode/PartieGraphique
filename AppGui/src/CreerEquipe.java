@@ -45,7 +45,7 @@ public class CreerEquipe extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreerEquipe(ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe) {
+	public CreerEquipe(ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Match> listeMatch ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
 		setResizable(false);
@@ -106,50 +106,12 @@ public class CreerEquipe extends JFrame {
 		EntreeVille.setBounds(96, 218, 158, 20);
 		CreerEquipe1.add(EntreeVille);
 		EntreeVille.setColumns(10);
-		
-		JPanel CreerEquipe2 = new JPanel();
 			
 		JLabel lblTactiqueParDfaut = new JLabel("Tactique par d\u00E9faut :");
 		lblTactiqueParDfaut.setForeground(Color.WHITE);
 		lblTactiqueParDfaut.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		lblTactiqueParDfaut.setBounds(48, 279, 167, 34);
 		CreerEquipe1.add(lblTactiqueParDfaut);
-		
-		/*JComboBox<String> choixTactique = new JComboBox<String>(tactique);
-		choixTactique.setBounds(202, 288, 124, 22);
-		CreerEquipe1.add(choixTactique);*/
-		
-		
-		CreerEquipe2.setLayout(null);
-		CreerEquipe2.setBackground(new Color(91, 64, 153));
-		Parent.add(CreerEquipe2, "name_149922086670100");
-		
-		JLabel lblCrerUnequipe = new JLabel("Cr\u00E9er une \u00E9quipe :");
-		lblCrerUnequipe.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCrerUnequipe.setForeground(Color.WHITE);
-		lblCrerUnequipe.setFont(new Font("Segoe UI", Font.PLAIN, 23));
-		lblCrerUnequipe.setBounds(10, 62, 448, 47);
-		CreerEquipe2.add(lblCrerUnequipe);
-		
-		JButton btnAjouterUnequipe = new JButton("Ajouter un joueur d\u00E9j\u00E0 \u00E9xistant");
-		btnAjouterUnequipe.setForeground(new Color(91, 64, 153));
-		btnAjouterUnequipe.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-		btnAjouterUnequipe.setBackground(Color.WHITE);
-		btnAjouterUnequipe.setBounds(112, 186, 249, 23);
-		CreerEquipe2.add(btnAjouterUnequipe);
-		
-		JLabel lblOu = new JLabel("ou");
-		lblOu.setForeground(Color.WHITE);
-		lblOu.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		lblOu.setBounds(222, 219, 23, 23);
-		CreerEquipe2.add(lblOu);
-		
-		JButton btnCrerUnequipe = new JButton("Cr\u00E9er un joueur puis l'ajouter");
-		btnCrerUnequipe.setForeground(new Color(91, 64, 153));
-		btnCrerUnequipe.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-		btnCrerUnequipe.setBackground(Color.WHITE);
-		btnCrerUnequipe.setBounds(112, 253, 249, 23);
-		CreerEquipe2.add(btnCrerUnequipe);
 	
 		JLabel lblPays = new JLabel("Pays :");
 		lblPays.setForeground(Color.WHITE);
@@ -168,12 +130,12 @@ public class CreerEquipe extends JFrame {
 		btnContinuer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nomEquipe = EntreeNomEquipe.getText();
-				String nbJoueurs = EntreeNbJoueur.getText();
+				int nbJoueurs = Integer.parseInt(EntreeNbJoueur.getText());
 				String ville = EntreeVille.getText();
 				String pays = EntreePays.getText();
 				//String poste = choixTactique.getSelectedItem().toString();			
 				dispose();
-				AjouterJoueur fenetreAj = new AjouterJoueur(listeEquipe);
+				AjouterJoueur fenetreAj = new AjouterJoueur(nbJoueurs, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
 				fenetreAj.setVisible(true);
 			}
 		});

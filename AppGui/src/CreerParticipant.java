@@ -31,6 +31,9 @@ public class CreerParticipant extends JDialog implements WindowListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private ArrayList<Joueur> listeJ;
+	private ArrayList<Arbitre> listeA;
+	private ArrayList<Entrainneur> listeE;
 
 	/**
 	 * Launch the application.
@@ -39,9 +42,7 @@ public class CreerParticipant extends JDialog implements WindowListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {					
-					CreerParticipant creerParticipant = new CreerParticipant();
-					creerParticipant.setModal(true);
-					creerParticipant.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -57,12 +58,8 @@ public class CreerParticipant extends JDialog implements WindowListener{
 		
 	}*/
 	
-	public CreerParticipant(/*ArrayList<Joueur> listeJoueur, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur*/) {
-		
-		ArrayList<Joueur> listeJoueur = new ArrayList();
-		ArrayList<Arbitre> listeArbitre = new ArrayList();
-		ArrayList<Entrainneur> listeEntrainneur = new ArrayList();
-		
+	public CreerParticipant(ArrayList<Joueur> listeJoueur, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur) {
+
 		setBounds(470, 250, 468, 411);
 		setResizable(false);
 		setUndecorated(true);
@@ -178,6 +175,7 @@ public class CreerParticipant extends JDialog implements WindowListener{
 							public void mousePressed(MouseEvent e) {
 								dispose();
 								CreerJoueur fenetreJ = new CreerJoueur(listeJoueur);
+								listeJ = fenetreJ.getList();
 								fenetreJ.setVisible(true);
 							}
 						});
@@ -209,6 +207,7 @@ public class CreerParticipant extends JDialog implements WindowListener{
 							public void mousePressed(MouseEvent e) {
 								dispose();
 								CreerEntrainneur fenetreE = new CreerEntrainneur(listeEntrainneur);
+								listeE = fenetreE.getList();
 								fenetreE.setVisible(true);
 							}
 						});
