@@ -130,13 +130,15 @@ public class CreerEquipe extends JFrame {
 		btnContinuer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nomEquipe = EntreeNomEquipe.getText();
-				int nbJoueurs = Integer.parseInt(EntreeNbJoueur.getText());
+				int nbJoueurs = Integer.parseInt(EntreeNbJoueur.getText())+1;
 				String ville = EntreeVille.getText();
 				String pays = EntreePays.getText();
 				//String poste = choixTactique.getSelectedItem().toString();			
 				dispose();
-				AjouterJoueur fenetreAj = new AjouterJoueur(nbJoueurs, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
+				for (int i = 0; i < nbJoueurs; i++) {
+				AjouterJoueur fenetreAj = new AjouterJoueur(nbJoueurs - 1, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
 				fenetreAj.setVisible(true);
+				}
 			}
 		});
 		btnContinuer.setBackground(Color.WHITE);

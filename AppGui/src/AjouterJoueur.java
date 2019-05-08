@@ -26,6 +26,7 @@ public class AjouterJoueur extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private int nb = 0;
+	private ArrayList<Joueur> listeJoueur;
 
 	/**
 	 * Launch the application.
@@ -86,9 +87,9 @@ public class AjouterJoueur extends JFrame {
 		btnAjouterUnequipe.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				dispose();
-				Ajouter fenetre = new Ajouter(2, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
-				fenetre.setVisible(true);
+				dispose();				
+				Ajouter fenetre = new Ajouter(2, nb, listeCompet, listeJoueur, listeEquipe, listeArbitre, listeEntrainneur, listeMatch);
+				fenetre.setVisible(true);								
 			}
 		});
 		btnAjouterUnequipe.setForeground(new Color(91, 64, 153));

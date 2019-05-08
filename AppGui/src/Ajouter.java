@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -33,6 +34,7 @@ public class Ajouter extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private ArrayList<Joueur> listeJ;
 
 	/**
 	 * Launch the application.
@@ -52,7 +54,7 @@ public class Ajouter extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public Ajouter(int choix, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Match> listeMatch ) {
+	public Ajouter(int choix, int nb, ArrayList<Competition> listeCompet, ArrayList<Joueur> listeJoueur, ArrayList<Equipe> listeEquipe, ArrayList<Arbitre> listeArbitre, ArrayList<Entrainneur> listeEntrainneur, ArrayList<Match> listeMatch ) {
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(470, 250, 468, 411);
@@ -104,9 +106,17 @@ public class Ajouter extends JDialog {
 				}
 				
 				Menu1.add(table);
-				/**int ligne = table.getSelectedRow();
-				Joueur joueur = listeJoueur.get(table.convertRowIndexToModel(ligne));
-				System.out.println(joueur);*/
+				table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				table.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						int ligne = table.getSelectedRow();						
+						Joueur joueur = listeJoueur.get(table.convertRowIndexToModel(ligne));
+						listeJoueur.add(joueur);
+						setList(listeJoueur);
+						dispose();
+					}
+				});							
 			break;
 			case 3:
 				titre = "Ajouter un arbitre :";
@@ -192,7 +202,7 @@ public class Ajouter extends JDialog {
 			}
 		});
 		quitter2.setIcon(new ImageIcon(imageQuitter));
-		quitter2.setBounds(418, 11, 40, 36);
+		quitter2.setBounds(408, 11, 40, 36);
 		Menu2.add(quitter2);
 		
 		if (choix == 2 || choix == 4 || choix == 5) {
@@ -213,5 +223,13 @@ public class Ajouter extends JDialog {
 			btnContinuer.setBounds(106, 343, 269, 23);
 			Menu1.add(btnContinuer);
 		}
+	}
+	
+	public void setList(ArrayList<Joueur> listeJoueur) {
+		listeJ = listeJoueur;
+	}
+	
+	public ArrayList<Joueur> getList() {
+		return listeJ;
 	}
 }
